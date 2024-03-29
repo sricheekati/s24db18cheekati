@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  p This will display some #{title} information.
+  button(type="button", class="btn btn-secondary") Show Hats
+
+  br
+  br
+
+  
+  div.container-fluid
+    div.row
+      -
+        let results = [
+          { hats_type: 'baseball cap', size: 'small', price: 15 },
+          { hats_type: 'cowboy hat', size: 'Medium', price: 25 },
+          { hats_type: 'top hat', size: 'Small', price: 45 }
+        ]
+        
+      each hats,index in results
+        .col-sm-2(onclick=`buy(${index})`)
+          p hats Type: #{hats.hats_type}
+          p Size: #{hats.size}
+          p Price: $#{hats.price.toFixed(2)}
+
+  a(href="/") Back to index
+  script.
+    function buy(index) {
+        alert(`You purchased item ${index}`);
+    }
