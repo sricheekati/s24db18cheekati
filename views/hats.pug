@@ -12,17 +12,13 @@ block content
   div.container-fluid
     div.row
       -
-        let results = [
-          { hats_type: 'baseball cap', size: 'small', price: 15 },
-          { hats_type: 'cowboy hat', size: 'Medium', price: 25 },
-          { hats_type: 'top hat', size: 'Small', price: 45 }
-        ]
+        let items = results
         
-      each hats,index in results
+      each item,index in results
         .col-sm-2(onclick=`buy(${index})`)
-          p hats Type: #{hats.hats_type}
-          p Size: #{hats.size}
-          p Price: $#{hats.price.toFixed(2)}
+          p hats Type: #{item.hats_type}
+          p Size: #{item.size}
+          p Price: $#{item.price.toFixed(2)}
 
   a(href="/") Back to index
   script.
