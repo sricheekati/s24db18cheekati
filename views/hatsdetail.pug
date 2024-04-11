@@ -1,0 +1,20 @@
+extends layout
+block content
+ h1= title
+ - let hatsid = toShow._id
+ - let hats_type = toShow.hats_type
+ - let hatscost = toShow.cost
+ - let hatssize = toShow.size
+ div
+ div.row
+ div(class='hatsAttr mr-3') hats ID is:
+ div #{hatsid}
+ div.row
+ div(class='hatsAttr mr-3') hats Type is:
+ div #{hats_type}
+ div.row
+ div(class='hatsAttr mr-3') hats Size is:
+ div #{hatssize}
+ div.row
+ div(class='hatsAttr mr-3') hats Cost is:
+ div #{hatscost}

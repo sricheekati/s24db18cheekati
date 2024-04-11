@@ -1,0 +1,44 @@
+extends layout
+ 
+block content
+    h1= title
+ 
+    if (toShow == null)
+        h2 No instance to update
+    else
+        - let hatsid = toShow._id
+        - let hats_type = toShow.hats_type
+        - let size = toShow.size
+        - let price = toShow.price
+        div.row(class='mb-2')
+            div.mr-1 ID is
+                div #{hatsid}
+                - let actionid = "/resource/hats/" + hatsid
+                form(id='hatsForm', action= actionid, method="POST")
+                    div.form-group
+                        label.hatsAttr(for='hats_type') hats title
+                        input.ATTR#hats_type(type='text' name='hats_type', value= hats_type)
+                    div.form-group
+                        label.hatsAttr(for='size') hats author
+                        input.ATTR#size(type='text' name='size', value= size)
+                    div.form-group
+                        label.hatsAttr(for='food_price') food Price
+                        input.ATTR#food_price(type='number' name='price', value= price)
+                    input.SUBMIT(type="submit")
+    script.
+        document.forms['hatsForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+                method: 'PUT',
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+                return resp.text(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Update succeeded")
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Update failed " + error )
+            });
+        });

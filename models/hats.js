@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const hatsSchema = mongoose.Schema({
-name: String,
+hats_type: String,
 size: String,
 price: Number
 })
