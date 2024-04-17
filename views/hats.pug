@@ -1,27 +1,33 @@
 extends layout
-
+ 
 block content
   h1= title
-  p This will display some #{title} information.
-  button(type="button", class="btn btn-secondary") Show Hats
-
-  br
-  br
-
-  
-  div.container-fluid
-    div.row
-      -
-        let items = results
-        
-      each item,index in results
-        .col-sm-2(onclick=`buy(${index})`)
-          p hats Type: #{item.hats_type}
-          p Size: #{item.size}
-          p Price: $#{item.price.toFixed(2)}
-
-  a(href="/") Back to index
-  script.
-    function buy(index) {
-        alert(`You purchased item ${index}`);
+  - let items = results;
+  each item in items
+    - let updatehats = `dispatch("/hats/update?id=${item._id}")`
+    - let hatsDetails = `dispatch("/hats/detail?id=${item._id}")`
+    - let hatsDeletion = `dispatch("/hats/delete?id=${item._id}")`
+    - let hatsCreate = `dispatch("/hats/create?id=${item._id}")`
+ 
+    div
+      p hats type - #{item.hats_type}
+      p hats size - #{item.size}
+      p Price - #{item.price}
+      button.btn.btn-primary.ml-1(onclick=updatehats) Update
+      button.btn.btn-secondary.ml-1(onclick=hatsDetails) Detail
+      button.btn.btn-danger.ml-1(onclick=hatsDeletion) Delete
+      button.btn.btn-info.m1-1(onclick=hatsCreate) Create
+      br
+      br
+ 
+  style.
+    .btn {
+      margin-right: 5px;
+      margin-bottom: 15px;
     }
+ 
+  script.
+    function dispatch(path){
+      window.location.href = path;
+    }
+ 
